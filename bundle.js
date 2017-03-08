@@ -15,8 +15,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   schema: {
     enabled: { default: true },
-    maxpitch: {default: PI_2},
-    maxyaw: {default: PI_2 * 6},
+    zoomModifier: {default: 1},
   },
 
   init: function () {
@@ -70,6 +69,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
   },
 
   updateOrientation: (function () {
+    calculateHoverZoom();
     var hmdEuler = new THREE.Euler();
     hmdEuler.order = 'YXZ';
     return function () {
@@ -158,7 +158,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     return {x: -2*(.5 - (event.clientX - rect.left)/rect.width), y: -2*(.5 - (event.clientY - rect.top)/rect.height)};
   },
 
-  onMouseMove: function (event) {
+  calculateHoverZoom: function (event) {
     var pos = this.getMousePosition(event, this.canvasEl);
     var x = pos.x;
     var y = pos.y;
@@ -167,8 +167,8 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     var yawObject = this.yawObject;
 
     if (!this.hovering || !this.data.enabled) { return; }
-    yawObject.rotation.y = this.data.maxyaw * -x;
-    pitchObject.rotation.x = this.data.maxpitch * -y;
+    yawObject.rotation.y += (x * this.data.zoomModifier) ;
+    pitchObject.rotation.x += (y*this.data.zoomModifier);
     // console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
   },
 
