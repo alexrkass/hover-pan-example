@@ -158,7 +158,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     // -1 is far left or top, 1 is far right or bottom
     return {x: -2*(.5 - (event.clientX - rect.left)/rect.width), y: -2*(.5 - (event.clientY - rect.top)/rect.height)};
   },
-  onMousemove: function (event) {
+  onMouseMove: function (event) {
     var pos = this.getMousePosition(event, this.canvasEl);
     var x = pos.x;
     var y = pos.y;
