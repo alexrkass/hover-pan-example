@@ -63,7 +63,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   update: function () {
     if (!this.data.enabled) { return; }
-    hoverZoom();
+    this.hoverZoom();
     this.controls.update();
     this.updateOrientation();
     this.updatePosition();
