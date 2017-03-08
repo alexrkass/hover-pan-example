@@ -15,8 +15,11 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   schema: {
     enabled: { default: true },
-    xZoomModifier: {default: 0},
-    yZoomModifier: {default: 0}
+    xZoomModifier: {default: 1},
+    yZoomModifier: {default: 1},
+    xZoomSpeed: {default: 0},
+    yZoomSpeed: {default: 0},
+
   },
 
   init: function () {
@@ -164,8 +167,8 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     var x = pos.x;
     var y = pos.y;
 
-    this.data.xZoomModifier =  x;
-    this.data.yZoomModifier =  y;
+    this.data.xZoomSpeed =  (-x/100) * this.data.xZoomModifier;
+    this.data.yZoomSpeed =  (-y/100) * this.data.yZoomModifier;
   },
 
   hoverZoom: function (event) {
@@ -175,8 +178,8 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
     if (!this.hovering || !this.data.enabled) { return; }
 
-    yawObject.rotation.y += this.data.xZoomModifier;
-    pitchObject.rotation.x += this.data.yZoomModifier;
+    yawObject.rotation.y += this.data.xZoomSpeed;
+    pitchObject.rotation.x += this.data.yZoomSpeed;
     // console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
   },
 
