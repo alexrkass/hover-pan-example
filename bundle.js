@@ -7,7 +7,7 @@ require('./no-click.js');
 var registerComponent = require('./node_modules/aframe-core/src/core/component').registerComponent;
 var THREE = require('./node_modules/aframe-core/lib/three');
 
-// To avoid recalculation at every mouse movement tick
+// To avoid recalculation
 var PI_2 = Math.PI / 2;
 
 module.exports.Component = registerComponent('no-click-look-controls', {
@@ -15,7 +15,8 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   schema: {
     enabled: { default: true },
-    zoomModifier: {default: 1},
+    xZoomModifier: {default: 1},
+    yZoomModifier: {default: 1}
   },
 
   init: function () {
@@ -31,7 +32,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   setupMouseControls: function () {
     this.canvasEl = document.querySelector('a-scene').canvas;
-    // The canvas where the scene is painted
+    this.zoomSpeed = 0;
     this.hovering = false;
     this.pitchObject = new THREE.Object3D();
     this.yawObject = new THREE.Object3D();
@@ -62,6 +63,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   update: function () {
     if (!this.data.enabled) { return; }
+    hoverZoom();
     this.controls.update();
     this.updateOrientation();
     this.updatePosition();
@@ -69,7 +71,6 @@ module.exports.Component = registerComponent('no-click-look-controls', {
   },
 
   updateOrientation: (function () {
-    calculateHoverZoom();
     var hmdEuler = new THREE.Euler();
     hmdEuler.order = 'YXZ';
     return function () {
@@ -157,18 +158,24 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     // -1 is far left or top, 1 is far right or bottom
     return {x: -2*(.5 - (event.clientX - rect.left)/rect.width), y: -2*(.5 - (event.clientY - rect.top)/rect.height)};
   },
-
-  calculateHoverZoom: function (event) {
+  onMousemove: function (event) {
     var pos = this.getMousePosition(event, this.canvasEl);
     var x = pos.x;
     var y = pos.y;
+
+    this.data.xZoomModifier =  x;
+    this.data.yZoomModifier =  y;
+  },
+
+  hoverZoom: function (event) {
 
     var pitchObject = this.pitchObject;
     var yawObject = this.yawObject;
 
     if (!this.hovering || !this.data.enabled) { return; }
-    yawObject.rotation.y += (x * this.data.zoomModifier) ;
-    pitchObject.rotation.x += (y*this.data.zoomModifier);
+
+    yawObject.rotation.y += this.data.xZoomModifier;
+    pitchObject.rotation.x += this.data.yZoomModifier;
     // console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
   },
 
