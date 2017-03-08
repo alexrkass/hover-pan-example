@@ -15,8 +15,8 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   schema: {
     enabled: { default: true },
-    xZoomModifier: {default: 1},
-    yZoomModifier: {default: 1}
+    xZoomModifier: {default: 0},
+    yZoomModifier: {default: 0}
   },
 
   init: function () {
@@ -158,6 +158,7 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     // -1 is far left or top, 1 is far right or bottom
     return {x: -2*(.5 - (event.clientX - rect.left)/rect.width), y: -2*(.5 - (event.clientY - rect.top)/rect.height)};
   },
+
   onMouseMove: function (event) {
     var pos = this.getMousePosition(event, this.canvasEl);
     var x = pos.x;
