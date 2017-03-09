@@ -16,8 +16,8 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
   schema: {
     enabled: { default: true},
     yaw_control_enabled: { default: true},
-    maxyaw: {default: PI/2},
-    minyaw: {default: -PI/2},
+    maxpitch: {default: PI/2},
+    minpitch: {default: -PI/2},
     xZoomModifier: {default: 1},
     yZoomModifier: {default: 1},
 
@@ -177,7 +177,7 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     var yawObject = this.yawObject;
 
     if (!this.hovering || !this.data.enabled) { return; }
-    if (this.data.yaw_control_enabled == true && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (yawObject.rotation.y < this.data.minyaw && this.yZoomSpeed < 0))) {console.log("fail"); return;}
+    if (this.data.yaw_control_enabled && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (yawObject.rotation.y < this.data.minyaw && this.yZoomSpeed < 0))) {console.log("fail"); return;}
     yawObject.rotation.y += this.xZoomSpeed;
     pitchObject.rotation.x += this.yZoomSpeed;
     console.log(pitchObject.rotation.x);
