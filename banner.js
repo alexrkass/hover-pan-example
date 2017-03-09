@@ -12,6 +12,6 @@ function(){
 
 // Remove VR button
 function (){
-    var button = document.getElementByClassName('a-enter-vr-button')[0];
+    var button = document.getElementsByClassName('a-enter-vr-button')[0];
     button.parentNode.removeChild(button);
 }()
