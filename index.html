@@ -5,19 +5,15 @@
     <meta charset="utf-8">
     <title>hoverZoom</title>
     <meta name="description" content="a scene with custom desktop camera controls">
-    <link rel="stylesheet" href="hover-zoom.css" />
+    <script src="bundle.js"></script>
 
   </head>
   <body>
     <a-scene id="scene">
-      <a-assets>
-        <img id='img' src='background.jpg'/>
-        <video id="vid" src="sunset.mov" autoplay loop ></video>
-      </a-assets>
-      <a-entity camera="fov:80" hover-zoom-look-controls>
-      <a-videosphere src="#vid" rotation="0 180 0" id="banner-video"></a-videosphere>
+
+      <a-entity camera="fov:80" hover-zoom-look-controls></a-entity>
+      <a-videosphere src="sunset.mov" rotation="0 180 0" id="banner-video" autoplay loop></a-videosphere>
     </a-scene>
-    <script src="bundle.js"></script>
-    <script src="fallback.js"></script>
+    <!-- <script src="fallback.js"></script> -->
   </body>
 </html>
