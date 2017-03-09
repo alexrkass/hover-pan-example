@@ -177,7 +177,7 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     var yawObject = this.yawObject;
 
     if (!this.hovering || !this.data.enabled) { return; }
-    if (this.data.yaw_control_enabled == true && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (yawObject.rotation.y < this.data.minyaw && this.yZoomSpeed < 0))) {console.log("fail"; return;}
+    if (this.data.yaw_control_enabled == true && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (yawObject.rotation.y < this.data.minyaw && this.yZoomSpeed < 0))) {console.log("fail"); return;}
     yawObject.rotation.y += this.xZoomSpeed;
     pitchObject.rotation.x += this.yZoomSpeed;
     console.log(pitchObject.rotation.x);
