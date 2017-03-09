@@ -70,7 +70,6 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     this.controls.update();
     this.updateOrientation();
     this.updatePosition();
-    console.log("updated");
   },
 
   updateOrientation: (function () {
