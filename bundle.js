@@ -16,8 +16,8 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
   schema: {
     enabled: { default: true},
     yaw_control_enabled: { default: true},
-    maxyaw: {default: 2 * PI},
-    minyaw: {default: -2 * PI},
+    maxyaw: {default: PI/2},
+    minyaw: {default: -PI/2},
     xZoomModifier: {default: 1},
     yZoomModifier: {default: 1},
 
