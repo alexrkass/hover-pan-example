@@ -1,5 +1,5 @@
 //Fallback for mobile
-function(){
+function{
     if(window.innerWidth <= 1080){
         var image = document.createElement("a-sky");
         image.setAttribute("src","background.jpg");
@@ -11,7 +11,7 @@ function(){
 }();
 
 // Remove VR button
-function (){
+function{
     var button = document.getElementsByClassName('a-enter-vr-button')[0];
     button.parentNode.removeChild(button);
 }()
