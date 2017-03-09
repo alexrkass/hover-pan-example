@@ -1,19 +1,23 @@
- 
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello, World! • A-Frame</title>
-    <meta name="description" content="Hello, World! • A-Frame">
+    <title>hoverZoom</title>
+    <meta name="description" content="a scene with custom desktop camera controls">
     <script src="bundle.js"></script>
 
   </head>
   <body>
     <a-scene>
-      <a-entity camera no-click-look-controls wasd-controls cursor-color="#33CCFF">
-        <a-entity cursor position="0 0 -50" geometry="primitive:ring" material="color:white;shader:flat"></a-entity>
-      </a-entity>
-      <a-sky src="background.jpg"></a-sky>
+      <a-assets>
+          <video id="video" src="sunset.mov" autoplay loop></video>
+      </a-assets>
+        <a-entity camera hover-zoom-look-controls wasd-controls cursor-color="#33CCFF">
+          <a-entity cursor position="0 0 -50" geometry="primitive:ring" material="color:white;shader:flat"></a-entity>
+        </a-entity>
+
+        <a-videosphere src="#video" rotation="0 180 0"></a-videosphere>
     </a-scene>
   </body>
 </html>

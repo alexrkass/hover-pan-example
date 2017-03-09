@@ -8,22 +8,27 @@ var registerComponent = require('./node_modules/aframe-core/src/core/component')
 var THREE = require('./node_modules/aframe-core/lib/three');
 
 // To avoid recalculation
-var PI_2 = Math.PI / 2;
+var PI = Math.PI;
 
-module.exports.Component = registerComponent('no-click-look-controls', {
+module.exports.Component = registerComponent('hover-zoom-look-controls', {
   dependencies: ['position', 'rotation'],
 
   schema: {
-    enabled: { default: true },
+    enabled: { default: true},
+    yaw_control_enabled: { default: true},
+    maxyaw: {default: 2 * PI},
+    minyaw: {default: -2 * PI},
     xZoomModifier: {default: 1},
     yZoomModifier: {default: 1},
-    xZoomSpeed: {default: 0},
-    yZoomSpeed: {default: 0},
+    // xZoomSpeed: {default: 0},
+    // yZoomSpeed: {default: 0},
 
   },
 
   init: function () {
     var scene = this.el.sceneEl;
+    var xZoomSpeed = 0;
+    var yZoomSpeed = 0;
     this.setupMouseControls();
     this.setupHMDControls();
     this.attachEventListeners();
@@ -35,7 +40,6 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
   setupMouseControls: function () {
     this.canvasEl = document.querySelector('a-scene').canvas;
-    this.zoomSpeed = 0;
     this.hovering = false;
     this.pitchObject = new THREE.Object3D();
     this.yawObject = new THREE.Object3D();
@@ -157,8 +161,8 @@ module.exports.Component = registerComponent('no-click-look-controls', {
 
     var rect = canvasEl.getBoundingClientRect();
 
-    // Returns a value from -1 to 1 for X and Y representing the percentage of the max-yaw and max-pitch from the center of the canvas
-    // -1 is far left or top, 1 is far right or bottom
+    // Returns a value from -1 to 1 for (X,Y) representing the percentage of the max-yaw and max-pitch from
+    // the center of the canvas, (0,0) being the center -1 is far left or top, 1 is far right or bottom
     return {x: -2*(.5 - (event.clientX - rect.left)/rect.width), y: -2*(.5 - (event.clientY - rect.top)/rect.height)};
   },
 
@@ -167,8 +171,8 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     var x = pos.x;
     var y = pos.y;
 
-    this.data.xZoomSpeed =  (-x/100) * this.data.xZoomModifier;
-    this.data.yZoomSpeed =  (-y/100) * this.data.yZoomModifier;
+    this.xZoomSpeed =  (-x/100) * this.data.xZoomModifier;
+    this.yZoomSpeed =  (-y/100) * this.data.yZoomModifier;
   },
 
   hoverZoom: function (event) {
@@ -177,9 +181,9 @@ module.exports.Component = registerComponent('no-click-look-controls', {
     var yawObject = this.yawObject;
 
     if (!this.hovering || !this.data.enabled) { return; }
-
-    yawObject.rotation.y += this.data.xZoomSpeed;
-    pitchObject.rotation.x += this.data.yZoomSpeed;
+    if (this.data.yaw_control_enabled && ((pitchObject.rotation.x > this.data.maxpitch && yZoomSpeed > 0) || (yawObject.rotation.y < this.data.maxyaw && yZoomSpeed < 0))) {return;}
+    yawObject.rotation.y += this.xZoomSpeed;
+    pitchObject.rotation.x += this.yZoomSpeed;
     // console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
   },
 
