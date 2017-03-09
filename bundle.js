@@ -15,7 +15,7 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
 
   schema: {
     enabled: { default: true},
-    yaw_control_enabled: { default: true},
+    pitch_control_enabled: { default: true},
     maxpitch: {default: PI/2},
     minpitch: {default: -PI/2},
     xZoomModifier: {default: 1},
@@ -31,7 +31,6 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     scene.addBehavior(this);
     this.previousPosition = new THREE.Vector3();
     this.deltaPosition = new THREE.Vector3();
-    console.log("ready")
   },
 
   setupMouseControls: function () {
@@ -168,7 +167,6 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
 
     this.xZoomSpeed =  (-x/100) * this.data.xZoomModifier;
     this.yZoomSpeed =  (-y/100) * this.data.yZoomModifier;
-    console.log(this.xZoomSpeed);
   },
 
   hoverZoom: function (event) {
@@ -177,10 +175,9 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     var yawObject = this.yawObject;
 
     if (!this.hovering || !this.data.enabled) { return; }
-    if (this.data.yaw_control_enabled && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (pitchObject.rotation.x < this.data.minpitch && this.yZoomSpeed < 0))) {console.log("fail"); return;}
+    if (this.data.pitch_control_enabled && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (pitchObject.rotation.x < this.data.minpitch && this.yZoomSpeed < 0))) {console.log("fail"); return;}
     yawObject.rotation.y += this.xZoomSpeed;
     pitchObject.rotation.x += this.yZoomSpeed;
-    console.log(pitchObject.rotation.x);
     // console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
   },
 
