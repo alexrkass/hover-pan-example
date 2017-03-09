@@ -1,4 +1,4 @@
-if(window.innerWidth <= 800){
+if(window.innerWidth <= 1080){
     var image = document.createElement("a-sky");
     image.setAttribute("src","background.jpg");
     var scene = document.getElementById("scene");
