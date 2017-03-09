@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <title>hoverZoom</title>
     <meta name="description" content="a scene with custom desktop camera controls">
+    <link rel="stylesheet" href="hover-zoom.css" />
 
   </head>
   <body>
     <a-scene>
-      <a-assets id = "assets">
-      <script>
+      <a-assets>
+<!--       <script>
       if(window.innerWidth <= 1000){
         var image = document.createElement("img");
         image.innerHTML = "<img id='img' src='background.jpg'/>";
@@ -23,8 +24,15 @@
         var assets = document.getElementById("assets");
         assets.appendChild(video);
         }
-      </script>
+      </script> -->
+
+      <img id='img' src='background.jpg'/>
+      <video id="vid" src="sunset.mov"
+      autoplay loop ></video>
       </a-assets>
+      <a-entity camera="fov:80" hover-zoom-look-controls>
+      <a-sky src="#img" id= "image">
+      <a-videosphere src="#vid" rotation="0 180 0" id="video"></a-videosphere>
     </a-scene>
     <script src="bundle.js"></script>
   </body>
