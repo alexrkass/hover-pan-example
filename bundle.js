@@ -20,15 +20,11 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     minyaw: {default: -2 * PI},
     xZoomModifier: {default: 1},
     yZoomModifier: {default: 1},
-    // xZoomSpeed: {default: 0},
-    // yZoomSpeed: {default: 0},
 
   },
 
   init: function () {
     var scene = this.el.sceneEl;
-    var xZoomSpeed = 0;
-    var yZoomSpeed = 0;
     this.setupMouseControls();
     this.setupHMDControls();
     this.attachEventListeners();
@@ -181,7 +177,7 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     var yawObject = this.yawObject;
 
     if (!this.hovering || !this.data.enabled) { return; }
-    if (this.data.yaw_control_enabled && ((pitchObject.rotation.x > this.data.maxpitch && yZoomSpeed > 0) || (yawObject.rotation.y < this.data.maxyaw && yZoomSpeed < 0))) {return;}
+    if (this.data.yaw_control_enabled == true && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (yawObject.rotation.y < this.data.maxyaw && this.yZoomSpeed < 0))) {return;}
     yawObject.rotation.y += this.xZoomSpeed;
     pitchObject.rotation.x += this.yZoomSpeed;
     // console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
