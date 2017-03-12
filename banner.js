@@ -12,4 +12,3 @@
 
     var button = document.getElementsByClassName('a-enter-vr-button')[0];
     button.parentNode.removeChild(button);
-

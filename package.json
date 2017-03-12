@@ -1,0 +1,19 @@
+{
+  "name": "hover-pan-example",
+  "version": "1.0.0",
+  "description": "A-frame custom component",
+  "main": "banner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexrkass/hover-pan-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexrkass/hover-pan-example/issues"
+  },
+  "homepage": "https://github.com/alexrkass/hover-pan-example#readme"
+}
