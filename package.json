@@ -2,7 +2,7 @@
   "name": "hover-pan-example",
   "version": "1.0.0",
   "description": "A-frame custom component",
-  "main": "banner.js",
+  "main": "bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

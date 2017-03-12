@@ -172,7 +172,7 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
     if (this.data.pitch_control_enabled && ((pitchObject.rotation.x > this.data.maxpitch && this.yZoomSpeed > 0) || (pitchObject.rotation.x < this.data.minpitch && this.yZoomSpeed < 0))) {console.log("fail"); return;}
     yawObject.rotation.y += this.xZoomSpeed;
     pitchObject.rotation.x += this.yZoomSpeed;
-    // console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
+     console.log("yawObject = "+ yawObject.rotation.y + "and pitchObject = "+pitchObject.rotation.x);
   },
 
   onMouseOver: function (event) {
@@ -208,4 +208,4 @@ module.exports.Component = registerComponent('hover-zoom-look-controls', {
   onTouchEnd: function () {
     this.touchStarted = false;
   }
-})
+});
